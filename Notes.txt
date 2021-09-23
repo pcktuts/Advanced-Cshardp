@@ -1,17 +1,3 @@
-﻿DELEGATES = പ്രതിനിധി
+Practical use of Delegates
 
-English meaning: A person sent or authorized to represent others.
-
-
-It's a very important and powerful feature in Csharp for creating realtime applications. 
-
-If we want to pass a function as a parameter we can use Delegates.
-
-A delegate is a reference type. But instead of referring to an object, a delegate refers to a method.
-
-Declaring delegates means telling the compiler what kind of method a delegate of that type will represent. Then you create one or
-more instances of that delegate. 
-
-The syntax for declaring delegates is like this:
-
-delegate returntype IntMethodInvoker(int x);
+This is a practical usage of delegates in C#. check code to understand more.
