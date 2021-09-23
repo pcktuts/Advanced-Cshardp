@@ -1,34 +1,41 @@
-﻿using System;
-using System.Threading.Tasks;
+using System;
 
-
-namespace MyFirstProject
+namespace myFirstProject
 {
-    class Program
+    public delegate bool CustomerDelegate(Customer customer);
+    class MainClass
     {
-        delegate int ChangeNumber(int n);
         static void Main(string[] args)
         {
-
-            Console.WriteLine(Add10(20));
-            Console.WriteLine(Multiply10(100));
-            ChangeNumber del1 = new ChangeNumber(Add10);
-            Console.WriteLine( del1.Invoke(20));
-
-            ChangeNumber del2 = new ChangeNumber(Multiply10);
-            Console.WriteLine(del2.Invoke(100));
-            Console.WriteLine(del2(100));
-
+            var c = new Customer()
+            {
+                Name = "Krishna",
+                Salary = 14000,
+                LastThreeMonthsTransaction = 45000
+            };
+            Customer.IsEligibleForLoan(c, customer => customer.Salary > 10000 && customer.LastThreeMonthsTransaction > 30000);
+            Customer.IsEligibleForLoan(c, customer => customer.Salary > 500000 && customer.LastThreeMonthsTransaction > 12000);
 
         }
-        static int Add10(int n)
+
+
+
+    }
+    public class Customer
+    {
+        public string Name;
+        public int Salary;
+        public int LastThreeMonthsTransaction;
+
+        public static void IsEligibleForLoan(Customer c, CustomerDelegate cd)
         {
-            return n + 10;
+            if(cd(c))
+            {
+                Console.WriteLine("Loan approved");
+                return;
+            }
+            Console.WriteLine("Loan not approved");
         }
-        static int Multiply10(int n)
-        {
-            return n * 10;
-        }
-
+        
     }
 }
