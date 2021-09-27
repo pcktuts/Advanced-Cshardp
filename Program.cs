@@ -1,34 +1,29 @@
-﻿using System;
-using System.Threading.Tasks;
+using System;
 
-
-namespace MyFirstProject
+namespace myFirstProject
 {
-    class Program
+    public delegate void MultiCastDelegate();
+    class MainClass
     {
-        delegate int ChangeNumber(int n);
         static void Main(string[] args)
         {
-
-            Console.WriteLine(Add10(20));
-            Console.WriteLine(Multiply10(100));
-            ChangeNumber del1 = new ChangeNumber(Add10);
-            Console.WriteLine( del1.Invoke(20));
-
-            ChangeNumber del2 = new ChangeNumber(Multiply10);
-            Console.WriteLine(del2.Invoke(100));
-            Console.WriteLine(del2(100));
-
-
+            MultiCastDelegate md1 = new MultiCastDelegate(Hello);
+            MultiCastDelegate md2 = new MultiCastDelegate(Hi);
+            var md = md1 + md2;
+            md();
+            
         }
-        static int Add10(int n)
+        static void Hello()
         {
-            return n + 10;
+            Console.WriteLine("Hello");
         }
-        static int Multiply10(int n)
+        static void Hi()
         {
-            return n * 10;
+            Console.WriteLine("Hi");
         }
+
+
 
     }
+
 }
