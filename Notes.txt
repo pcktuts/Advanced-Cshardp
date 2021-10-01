@@ -1,17 +1,28 @@
-﻿DELEGATES = പ്രതിനിധി
+Lambda expressions 
 
-English meaning: A person sent or authorized to represent others.
+We can use a lambda expression to create an anonymous function.
+
+=> is called Lambda declaration operator.
 
 
-It's a very important and powerful feature in Csharp for creating realtime applications. 
+Use the lambda declaration
+operator => to separate the lambda's parameter list from its body.
 
-If we want to pass a function as a parameter we can use Delegates.
+A lambda expression is generally two types
 
-A delegate is a reference type. But instead of referring to an object, a delegate refers to a method.
+1. Expression Lambda
 
-Declaring delegates means telling the compiler what kind of method a delegate of that type will represent. Then you create one or
-more instances of that delegate. 
+Syntax:
 
-The syntax for declaring delegates is like this:
+(input-parameters) => expression
 
-delegate returntype IntMethodInvoker(int x);
+Returns the expression result, no need to add return keyword
+
+
+2. Statement Lambda
+
+Syntax:
+
+(input-parameters) => { <sequence-of-statements> }
+
+Doesn't return value implicitly
