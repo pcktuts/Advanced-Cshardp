@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -6,29 +9,96 @@ namespace MyFirstProject
 {
     class Program
     {
-        delegate int ChangeNumber(int n);
         static void Main(string[] args)
         {
 
-            Console.WriteLine(Add10(20));
-            Console.WriteLine(Multiply10(100));
-            ChangeNumber del1 = new ChangeNumber(Add10);
-            Console.WriteLine( del1.Invoke(20));
-
-            ChangeNumber del2 = new ChangeNumber(Multiply10);
-            Console.WriteLine(del2.Invoke(100));
-            Console.WriteLine(del2(100));
-
-
+            Company company = new Company();
+           
+            foreach (Employee item in company)
+            {
+                Console.WriteLine(item.Name);
+            }
+            var items = company.Employees.GetEnumerator();
+            while(items.MoveNext())
+            {
+                Console.WriteLine(items.Current.Name);
+            }
+          
         }
-        static int Add10(int n)
+       
+
+    }
+    class Employee
+    {
+        public string Name { get; set; }
+        public int Salary { get; set; }
+        public  Employee(string Name, int Salary)
         {
-            return n + 10;
+            this.Name = Name;
+            this.Salary = Salary;
         }
-        static int Multiply10(int n)
+    }
+
+    class Company: IEnumerable<Employee>
+    {
+        public List<Employee> Employees;
+        public Company()
         {
-            return n * 10;
+            Employees = new List<Employee>()
+            {
+                new Employee( "Krishna", 45000),
+                new Employee( "Arun", 25000),
+                new Employee( "Peter", 15000),
+                new Employee( "Ramesh", 15000),
+                new Employee( "Harry", 15000),
+                new Employee( "Mohammed", 15000),
+                new Employee( "Remya", 15000),
+            };
+
         }
 
+        IEnumerator<Employee> IEnumerable<Employee>.GetEnumerator()
+        {
+           // return Employees.GetEnumerator();
+           return new CompanyEnumerator(Employees);
+
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    class CompanyEnumerator : IEnumerator<Employee>
+    {        
+        public List<Employee> Employees;
+        int index = 0;
+
+        object IEnumerator.Current
+        {
+            get { return Current;  }
+        }
+
+        public CompanyEnumerator(List<Employee> Employees)
+        {
+            this.Employees = Employees;
+        }
+
+        public Employee Current =>  Employees[index++];
+
+        public bool MoveNext()
+        {
+            return index >= Employees.Count ? false : true;
+        }
+
+        public void Reset()
+        {
+            index = 0;
+        }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }
